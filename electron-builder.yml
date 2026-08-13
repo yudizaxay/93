@@ -1,0 +1,15 @@
+appId: com.coalitioncourtreporters.verdictchallenge
+productName: 9-3 Verdict Challenge
+directories:
+  output: release
+files:
+  - dist/**/*
+  - dist-electron/**/*
+win:
+  target:
+    - target: nsis
+    - target: portable
+nsis:
+  oneClick: true
+  perMachine: true
+  allowToChangeInstallationDirectory: false

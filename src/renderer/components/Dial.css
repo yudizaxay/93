@@ -1,0 +1,147 @@
+.dial {
+  position: relative;
+  width: clamp(14rem, 34vh, 26rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    var(--red-bright) var(--fill, 0%),
+    rgba(237, 227, 208, 0.07) var(--fill, 0%)
+  );
+  transition: background 0.08s linear, transform 0.12s ease-out;
+  filter: drop-shadow(0 0 2.5rem rgba(200, 40, 63, 0.25));
+}
+
+/* Instant tactile feedback for the mouse/touch backup — the physical
+   arcade button gets its feedback from .dial-punch below instead, since
+   it arrives as a keyboard event with no :active state to hook into. */
+.dial:active {
+  transform: scale(0.97);
+}
+
+/* Fired by mounting the screen a press just produced (RunningScreen on
+   start, ResultScreen on stop) — this reacts to any input source alike:
+   physical button, keyboard, or the on-screen click backup, since all
+   three land here only via a real GameEngine state change. */
+.dial-punch {
+  animation: dial-punch 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes dial-punch {
+  0% { transform: scale(0.82); }
+  55% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.dial-brass {
+  background: conic-gradient(
+    from -90deg,
+    var(--brass) var(--fill, 100%),
+    rgba(237, 227, 208, 0.07) var(--fill, 100%)
+  );
+  filter: drop-shadow(0 0 3rem rgba(199, 160, 69, 0.45));
+}
+
+.dial-dim {
+  background: conic-gradient(
+    from -90deg,
+    var(--brass-dim) var(--fill, 100%),
+    rgba(237, 227, 208, 0.07) var(--fill, 100%)
+  );
+  filter: none;
+}
+
+/* Idle-only: a slow breathing glow so the booth reads as "waiting for you"
+   from across the room rather than a dead, static ring. */
+.dial-ambient {
+  animation: dial-breathe 3.4s ease-in-out infinite;
+}
+
+@keyframes dial-breathe {
+  0%, 100% { filter: drop-shadow(0 0 1.4rem rgba(199, 160, 69, 0.22)); }
+  50% { filter: drop-shadow(0 0 3.2rem rgba(199, 160, 69, 0.5)); }
+}
+
+/* A thin bright arc that slowly circles the ring, like a courtroom clock's
+   second hand sweeping — the idle screen's ambient "this is alive" cue. */
+.dial-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    transparent 0deg,
+    rgba(237, 227, 208, 0.5) 3deg,
+    transparent 10deg
+  );
+  animation: dial-sweep-rotate 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes dial-sweep-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dial-ambient,
+  .dial-sweep {
+    animation: none;
+  }
+}
+
+/* Fine clock-face ticks etched around the ring, masked to a thin band. */
+.dial-ticks {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 5.4deg,
+    rgba(237, 227, 208, 0.16) 5.4deg 6deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.2rem), #000 calc(100% - 0.2rem));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 0.2rem), #000 calc(100% - 0.2rem));
+}
+
+/* Brass tick marking the real target — angle is computed in Dial.tsx from
+   the actual (possibly admin-configured) target value, so it always lines
+   up with where the fill ring genuinely reaches that value. */
+.dial-target-mark {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--target-angle, 119.25deg));
+  pointer-events: none;
+}
+
+.dial-target-mark::before {
+  content: '';
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  width: 0.2rem;
+  height: 8%;
+  background: var(--brass);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0.6rem var(--brass);
+}
+
+.dial-face {
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+}

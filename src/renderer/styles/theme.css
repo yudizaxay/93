@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../assets/fonts/Fraunces-Variable.ttf') format('truetype-variations');
+  font-weight: 300 900;
+  font-stretch: 85% 120%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../assets/fonts/IBMPlexMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../assets/fonts/IBMPlexMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../assets/fonts/IBMPlexMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  /* Base palette — kept as the original names so every existing
+     var(--color-x, #fallback) usage across the app inherits the
+     refined tones automatically. */
+  --color-black: #0b0b0c;
+  --color-red: #9e1b32;
+  --color-white: #ede3d0;
+  --color-gold: #c7a045;
+
+  /* Extended "digital courtroom" palette for the revamped screens. */
+  --ink: #0b0b0c;
+  --panel: #17120f;
+  --panel-line: #2a221c;
+  --red: #9e1b32;
+  --red-bright: #c8283f;
+  --brass: #c7a045;
+  --brass-dim: #8c6d3f;
+  --parchment: #ede3d0;
+  --ink-muted: #948b7f;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink);
+  overflow: hidden;
+  cursor: none;
+}
+
+body.cursor-visible {
+  cursor: default;
+}

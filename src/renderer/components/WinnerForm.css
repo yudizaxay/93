@@ -1,0 +1,138 @@
+.winner-form {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 2.4vh, 1.8rem);
+  padding: clamp(1rem, 3vh, 2rem);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(199, 160, 69, 0.14), transparent 70%),
+    var(--ink, #0b0b0c);
+  color: var(--parchment, #ede3d0);
+  text-align: center;
+  overflow: hidden;
+  animation: winner-form-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes winner-form-in {
+  from { opacity: 0; transform: translateY(1.2rem) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.winner-form-eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+  letter-spacing: 0.28em;
+  color: var(--brass, #c7a045);
+}
+
+.winner-form h1 {
+  font-family: var(--font-display, serif);
+  font-weight: 650;
+  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+  line-height: 1.15;
+  max-width: 32rem;
+}
+
+.winner-card {
+  width: min(92vw, 30rem);
+  padding: clamp(1.2rem, 2.4vh, 1.8rem) clamp(1.2rem, 3vw, 1.8rem);
+  border-radius: 1.2rem;
+  background: var(--panel, #17120f);
+  border: 1px solid var(--panel-line, #2a221c);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+}
+
+.winner-fields { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.winner-fields label {
+  text-align: left;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  color: var(--ink-muted, #948b7f);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.winner-fields label.active { color: var(--brass, #c7a045); }
+
+.winner-input {
+  margin-top: 0.4rem;
+  border: 1px solid var(--panel-line, #2a221c);
+  border-radius: 0.6rem;
+  padding: 0.7rem 1rem;
+  font-size: 1.25rem;
+  min-height: 2.2rem;
+  background: rgba(11, 11, 12, 0.55);
+  color: var(--parchment, #ede3d0);
+  font-family: var(--font-body, sans-serif);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  /* A field is capped (see FIELD_MAX_LENGTH in WinnerForm.tsx), but this is
+     the layout-safety net: text can never spill out of the card no matter
+     what lands in the field. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.winner-fields label.active .winner-input {
+  border-color: var(--brass, #c7a045);
+  box-shadow: 0 0 0 3px rgba(199, 160, 69, 0.18);
+}
+
+.winner-input.invalid {
+  border-color: var(--red-bright, #c8283f);
+}
+
+.winner-fields label.active .winner-input.invalid {
+  box-shadow: 0 0 0 3px rgba(200, 40, 63, 0.22);
+}
+
+.winner-field-error {
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--red-bright, #c8283f);
+  text-transform: none;
+}
+
+.winner-actions { display: flex; gap: 1rem; margin-top: 0.4rem; }
+
+.winner-actions button {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.winner-actions button:active { transform: scale(0.96); }
+
+.winner-actions button[type='submit'],
+.winner-actions button:first-child {
+  background: linear-gradient(180deg, var(--red-bright, #c8283f), var(--red, #9e1b32));
+  color: var(--parchment, #ede3d0);
+  box-shadow: 0 0.5rem 1.4rem rgba(200, 40, 63, 0.4);
+}
+
+.winner-actions button:first-child:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.winner-actions button:last-child {
+  background: transparent;
+  color: var(--ink-muted, #948b7f);
+  border: 1px solid var(--panel-line, #2a221c);
+}
+
+.winner-actions button:last-child:hover { color: var(--parchment, #ede3d0); }

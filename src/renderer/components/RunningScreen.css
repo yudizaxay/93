@@ -1,0 +1,19 @@
+.running-screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vh, 2rem);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 55%, rgba(200, 40, 63, 0.18), transparent 70%),
+    var(--ink, #0b0b0c);
+}
+
+.running-eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(0.75rem, 1.4vw, 1.1rem);
+  letter-spacing: 0.24em;
+  color: var(--red-bright, #c8283f);
+}

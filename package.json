@@ -1,0 +1,36 @@
+{
+  "name": "93-verdict-challenge",
+  "version": "1.0.0",
+  "description": "9-3 Verdict Challenge booth kiosk game for Coalition Court Reporters",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "package": "npm run build && electron-builder"
+  },
+  "keywords": [],
+  "author": "Coalition Court Reporters",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "electron-store": "^11.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vite-plugin-electron": "^1.1.1",
+    "vite-plugin-electron-renderer": "^1.0.0",
+    "vitest": "^4.1.10"
+  }
+}

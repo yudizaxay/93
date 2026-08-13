@@ -1,0 +1,9 @@
+.timer-display {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(2.4rem, 9vw, 4.8rem);
+  font-weight: 700;
+  color: var(--parchment, #ede3d0);
+  text-align: center;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,215 @@
+/* Landscape is the client-confirmed primary orientation (43" landscape TV,
+   viewed from across a booth aisle) — everything is centered and scaled up
+   so the challenge reads clearly at a distance, not just up close. */
+.idle-screen {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 38%, rgba(158, 27, 50, 0.2), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 15% 20%, rgba(199, 160, 69, 0.08), transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(237, 227, 208, 0.025) 0px,
+      rgba(237, 227, 208, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    var(--ink);
+  color: var(--parchment);
+  overflow: hidden;
+}
+
+/* A faint watermark of the challenge number, oversized behind everything —
+   texture for the flat panel, never competing with the real "0.93" on the dial. */
+.idle-screen::before {
+  content: '0.93';
+  position: absolute;
+  left: 50%;
+  bottom: -12vh;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 42vw;
+  line-height: 1;
+  color: var(--parchment);
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.idle-brand,
+.idle-layout,
+.idle-winners-panel {
+  position: relative;
+  z-index: 1;
+}
+
+.idle-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: clamp(1rem, 2.5vh, 1.75rem) clamp(1.5rem, 3vw, 2.5rem) 0;
+  opacity: 0.75;
+}
+
+.idle-seal {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--red);
+  color: var(--red-bright);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.idle-brand-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  letter-spacing: 0.18em;
+}
+
+/* Title + dial stack and center; the press button and winner list are
+   anchored separately (see below) so this column stays free to grow the
+   dial without fighting either of them for space. */
+.idle-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.6rem, 1.6vh, 1.2rem);
+  padding: clamp(0.5rem, 2vh, 1.5rem) clamp(1.5rem, 4vw, 4rem) clamp(6rem, 14vh, 9rem);
+  text-align: center;
+}
+
+.idle-eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.3vw, 1.05rem);
+  letter-spacing: 0.28em;
+  color: var(--brass);
+}
+
+.idle-title {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 650;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--parchment);
+}
+
+.idle-prompt {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  color: var(--ink-muted);
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.idle-layout .dial {
+  width: clamp(18rem, 46vh, 34rem);
+}
+
+.idle-target {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 9.5vw, 6rem);
+  color: var(--parchment);
+  line-height: 1;
+}
+
+/* A glowing red button anchored to the bottom edge and partially clipped by
+   it — reads like the physical arcade button is mounted into the console
+   just below the screen, not a floating on-screen shape. */
+.idle-press-button {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: clamp(9rem, 15vh, 12.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, 42%);
+  background: radial-gradient(circle at 38% 32%, var(--red-bright) 0%, var(--red) 55%, #5c0f1c 100%);
+  box-shadow:
+    0 0.4rem 0 #4a0d18,
+    0 0.9rem 2.2rem rgba(200, 40, 63, 0.55),
+    inset 0 0.3rem 0.6rem rgba(255, 255, 255, 0.25);
+  animation: idle-press-button-pulse 1.8s ease-in-out infinite;
+}
+
+.idle-press-button-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.1em;
+  color: var(--parchment);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  margin-top: -18%;
+}
+
+@keyframes idle-press-button-pulse {
+  0%, 100% {
+    transform: translate(-50%, 42%) scale(1);
+    box-shadow:
+      0 0.4rem 0 #4a0d18,
+      0 0.9rem 2.2rem rgba(200, 40, 63, 0.55),
+      inset 0 0.3rem 0.6rem rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    transform: translate(-50%, 42%) scale(1.04);
+    box-shadow:
+      0 0.4rem 0 #4a0d18,
+      0 1.3rem 3.2rem rgba(200, 40, 63, 0.8),
+      inset 0 0.3rem 0.6rem rgba(255, 255, 255, 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idle-press-button { animation: none; }
+}
+
+/* The winner list moves off-center to a side column so it never competes
+   with the challenge for the middle of the screen. */
+.idle-winners-panel {
+  position: absolute;
+  top: 50%;
+  right: clamp(1.5rem, 4vw, 4rem);
+  transform: translateY(-50%);
+  max-width: 14vw;
+  text-align: right;
+}
+
+/* Two triggers for the same portrait layout: the physical screen's own
+   aspect ratio (media query), and the admin's explicit Kiosk & TV Display
+   orientation override (data attribute on <html>, set from App.tsx) — so
+   staff can preview/verify the portrait layout on a landscape dev monitor. */
+@media (orientation: portrait) {
+  .idle-title { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+  .idle-winners-panel {
+    position: static;
+    transform: none;
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+:root[data-orientation='portrait'] .idle-title { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+:root[data-orientation='portrait'] .idle-winners-panel {
+  position: static;
+  transform: none;
+  max-width: 90vw;
+  text-align: center;
+  margin-top: 1rem;
+}

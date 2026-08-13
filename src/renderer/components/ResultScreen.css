@@ -1,0 +1,68 @@
+.result-screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vh, 2rem);
+  background: var(--ink, #0b0b0c);
+  color: var(--parchment, #ede3d0);
+  text-align: center;
+}
+
+.result-value {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(2.4rem, 9vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-heading {
+  font-family: var(--font-display, serif);
+  font-weight: 650;
+  font-size: clamp(1.4rem, 4.4vw, 2.6rem);
+}
+
+.result-subheading {
+  font-family: var(--font-body, sans-serif);
+  font-size: clamp(1.1rem, 3vw, 1.9rem);
+  letter-spacing: 0.02em;
+}
+
+.result-win .result-value { color: var(--brass, #c7a045); }
+.result-win .result-heading { color: var(--red-bright, #c8283f); }
+.result-win .result-subheading { color: var(--brass, #c7a045); }
+
+.result-win .dial {
+  animation: stamp-settle 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+@keyframes stamp-settle {
+  0% { transform: scale(1.35) rotate(-6deg); opacity: 0; }
+  60% { transform: scale(0.96) rotate(1deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.result-near .result-heading,
+.result-near .result-subheading { color: var(--brass-dim, #8c6d3f); }
+
+.result-other .result-heading,
+.result-other .result-subheading { color: var(--ink-muted, #948b7f); }
+
+/* The "buzzer" — an instant flash acknowledging the stop press itself,
+   independent of the win/lose outcome that follows immediately after. */
+.result-buzzer-flash {
+  position: fixed;
+  inset: 0;
+  background: var(--parchment, #ede3d0);
+  z-index: 900;
+  pointer-events: none;
+  animation: buzzer-flash 0.22s ease-out forwards;
+}
+
+@keyframes buzzer-flash {
+  0% { opacity: 0.55; }
+  100% { opacity: 0; }
+}

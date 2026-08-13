@@ -1,0 +1,35 @@
+.osk {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.osk-row { display: flex; gap: 0.4rem; justify-content: center; }
+
+.osk button {
+  min-width: 2.6rem;
+  min-height: 2.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  border: 1px solid var(--panel-line, #2a221c);
+  border-radius: 0.5rem;
+  background: var(--panel, #17120f);
+  color: var(--parchment, #ede3d0);
+  cursor: pointer;
+  transition: transform 0.08s ease, border-color 0.12s ease;
+}
+
+.osk button:active {
+  transform: scale(0.94);
+  border-color: var(--brass, #c7a045);
+}
+
+.osk-wide { min-width: 7rem; }
+
+.osk-done {
+  background: linear-gradient(180deg, var(--red-bright, #c8283f), var(--red, #9e1b32));
+  border-color: transparent;
+  box-shadow: 0 0.3rem 0.9rem rgba(200, 40, 63, 0.35);
+}
