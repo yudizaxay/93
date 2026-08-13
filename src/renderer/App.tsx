@@ -89,7 +89,11 @@ export default function App() {
 
   return (
     <>
-      {renderScreen()}
+      {/* Every screen sizes itself to 100% of this frame (not 100vw/100vh), so
+          the portrait-preview letterbox in theme.css can actually shrink the
+          frame down to a 9:16 box on a landscape monitor — see the
+          `.kiosk-frame` rules there. */}
+      <div className="kiosk-frame">{renderScreen()}</div>
       {isAdminOpen && (
         <AdminPanel
           settings={active}

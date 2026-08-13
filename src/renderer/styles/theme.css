@@ -68,3 +68,32 @@ body {
 body.cursor-visible {
   cursor: default;
 }
+
+/* Fills the real window by default — the normal case, whether the physical
+   screen is landscape or genuinely portrait (a rotated booth TV reports a
+   narrow-tall window on its own, no override needed). */
+.kiosk-frame {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* The Admin Panel's "9:16 VERTICAL PORTRAIT" toggle forces `data-orientation`
+   independent of the real screen shape, so staff can preview the portrait
+   layout on an ordinary landscape monitor. On a screen that's ALREADY
+   portrait-shaped this is a no-op (the frame already fills a narrow window);
+   it only needs to do something when the physical window is landscape —
+   letterbox the frame down to a centered 9:16 box so the preview actually
+   looks like the tall booth TV instead of silently staying full-bleed. */
+@media (orientation: landscape) {
+  :root[data-orientation='portrait'] body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  :root[data-orientation='portrait'] .kiosk-frame {
+    /* body's own var(--ink) background shows through as the letterbox bars. */
+    width: min(100vw, calc(100vh * 9 / 16));
+    height: 100vh;
+    overflow: hidden;
+  }
+}

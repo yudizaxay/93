@@ -3,8 +3,8 @@
    so the challenge reads clearly at a distance, not just up close. */
 .idle-screen {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background:
@@ -172,12 +172,18 @@
   .idle-title {
     font-size: clamp(2.2rem, 9vw, 3.6rem);
   }
+  /* Stays absolutely positioned (not folded into normal flow) — `idle-layout`
+     is flex:1 and already claims all remaining vertical space, so a static
+     winners-panel has nowhere to land except squeezed into the same bottom
+     strip the press-button occupies, overlapping its "TAP TO START" label. */
   .idle-winners-panel {
-    position: static;
-    transform: none;
+    top: auto;
+    right: auto;
+    bottom: clamp(7.5rem, 17vh, 10.5rem);
+    left: 50%;
+    transform: translateX(-50%);
     max-width: 90vw;
     text-align: center;
-    margin-top: 1rem;
   }
 }
 
@@ -185,9 +191,11 @@
   font-size: clamp(2.2rem, 9vw, 3.6rem);
 }
 :root[data-orientation='portrait'] .idle-winners-panel {
-  position: static;
-  transform: none;
+  top: auto;
+  right: auto;
+  bottom: clamp(7.5rem, 17vh, 10.5rem);
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 90vw;
   text-align: center;
-  margin-top: 1rem;
 }

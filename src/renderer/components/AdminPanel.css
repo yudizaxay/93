@@ -476,3 +476,61 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Sits above the admin panel itself (higher z-index) so a Clear button press
+   is always followed by an explicit Yes/No step before anything is deleted. */
+.admin-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 2rem;
+}
+
+.admin-confirm-dialog {
+  background: var(--panel, #17120f);
+  color: var(--parchment, #ede3d0);
+  border: 1px solid var(--red, #9e1b32);
+  border-radius: 0.9rem;
+  width: min(92vw, 26rem);
+  padding: 1.6rem;
+  text-align: center;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.6);
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+.admin-confirm-dialog p {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+}
+
+.admin-confirm-warning {
+  color: var(--ink-muted, #948b7f);
+  font-size: 0.78rem !important;
+}
+
+.admin-confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.admin-confirm-cancel {
+  background: var(--ink, #0b0b0c);
+  border: 1px solid var(--panel-line, #2a221c);
+  color: var(--parchment, #ede3d0);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-confirm-cancel:hover {
+  border-color: var(--brass, #c7a045);
+}

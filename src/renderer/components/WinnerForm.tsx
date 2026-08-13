@@ -109,7 +109,12 @@ export function WinnerForm({
         handleBackspace();
         return;
       }
-      if (e.key === 'Enter') {
+      // Tab must advance through name -> lawFirm -> email -> save exactly like
+      // Enter/DONE does — without this, the browser's native Tab focus takes
+      // over (these fields are styled <div>s, not real <input>s) and jumps
+      // straight to the first real focusable element, the SAVE button,
+      // skipping Law Firm and Email entirely.
+      if (e.key === 'Enter' || e.key === 'Tab') {
         e.preventDefault();
         handleDone();
         return;

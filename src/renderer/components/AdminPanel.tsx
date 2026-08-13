@@ -174,6 +174,10 @@ export function AdminPanel({
   const [winners, setWinners] = useState<Winner[]>([]);
   const [showWinners, setShowWinners] = useState(false);
   const [plays, setPlays] = useState<PlayRecord[]>([]);
+  // Both CLEAR buttons are destructive and one accidental tap away from
+  // wiping real booth data — route both through this shared confirm step
+  // instead of clearing immediately on click.
+  const [confirmClear, setConfirmClear] = useState<'winners' | 'plays' | null>(null);
 
   useEffect(() => {
     audioManager.setEnabled(settings.soundEnabled);
@@ -201,6 +205,12 @@ export function AdminPanel({
   const clearHistory = async () => {
     await window.api.clearPlays();
     setPlays([]);
+  };
+
+  const runConfirmedClear = async () => {
+    if (confirmClear === 'winners') await clearWinners();
+    if (confirmClear === 'plays') await clearHistory();
+    setConfirmClear(null);
   };
 
   const downloadCsv = (content: string, filenamePrefix: string) => {
@@ -515,7 +525,7 @@ export function AdminPanel({
                 <button className="admin-export-button" onClick={exportWinnersCsv} disabled={winners.length === 0}>
                   <DownloadIcon /> EXPORT LEADS (NAME/FIRM/EMAIL) TO CSV
                 </button>
-                <button className="admin-danger-button" onClick={clearHistory}>
+                <button className="admin-danger-button" onClick={() => setConfirmClear('plays')}>
                   <TrashIcon /> CLEAR HISTORY
                 </button>
               </div>
@@ -525,7 +535,7 @@ export function AdminPanel({
                   {logs ? 'HIDE LOGS' : 'VIEW LOGS'}
                 </button>
                 <button onClick={toggleWinners}>{showWinners ? 'HIDE WINNERS' : 'VIEW WINNERS'}</button>
-                <button onClick={clearWinners}>CLEAR TODAY'S WINNERS</button>
+                <button onClick={() => setConfirmClear('winners')}>CLEAR TODAY'S WINNERS</button>
               </div>
 
               {logs && (
@@ -579,6 +589,26 @@ export function AdminPanel({
       </div>
       {showHardwareTest && (
         <HardwareTestPanel buttonKey={settings.buttonKey} onClose={() => setShowHardwareTest(false)} />
+      )}
+      {confirmClear && (
+        <div className="admin-confirm-overlay">
+          <div className="admin-confirm-dialog">
+            <p>
+              {confirmClear === 'winners'
+                ? "Clear today's captured winners/leads (names, law firms, emails)?"
+                : 'Clear the full play history (every recorded round)?'}
+            </p>
+            <p className="admin-confirm-warning">This cannot be undone. Export a CSV first if you need a record.</p>
+            <div className="admin-confirm-actions">
+              <button className="admin-danger-button" onClick={runConfirmedClear}>
+                YES, CLEAR
+              </button>
+              <button className="admin-confirm-cancel" onClick={() => setConfirmClear(null)}>
+                NO, CANCEL
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
