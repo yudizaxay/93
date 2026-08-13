@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["vite.config.ts", "src/main/preload.ts"]
+  "include": ["vite.config.mts", "src/main/preload.ts"]
 }

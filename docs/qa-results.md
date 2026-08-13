@@ -90,33 +90,33 @@ sign-off — not as completed results.
 
 ### Hardware testing (SOW §45)
 
-| # | Test | Status |
-|---|------|--------|
-| 1 | Normal press | PENDING — needs physical arcade button |
-| 2 | Fast press | PENDING — needs physical arcade button |
-| 3 | Slow press | PENDING — needs physical arcade button |
-| 4 | Button held down | PENDING — needs physical arcade button |
-| 5 | Rapid double press | PENDING — needs physical arcade button |
-| 6 | 100+ repeated games | PENDING — needs physical arcade button |
-| 7 | USB disconnect (app must not crash) | PENDING — needs physical hardware |
-| 8 | USB reconnect (input resumes without app restart) | PENDING — needs physical hardware |
-| 9 | PC restart | PENDING — needs physical kiosk PC |
-| 10 | App restart | PENDING — needs physical kiosk PC |
-| 11 | Several hundred to 1,000 simulated/manual game cycles | PENDING — needs physical arcade button, extended session |
+| #   | Test                                                  | Status                                                   |
+| --- | ----------------------------------------------------- | -------------------------------------------------------- |
+| 1   | Normal press                                          | PENDING — needs physical arcade button                   |
+| 2   | Fast press                                            | PENDING — needs physical arcade button                   |
+| 3   | Slow press                                            | PENDING — needs physical arcade button                   |
+| 4   | Button held down                                      | PENDING — needs physical arcade button                   |
+| 5   | Rapid double press                                    | PENDING — needs physical arcade button                   |
+| 6   | 100+ repeated games                                   | PENDING — needs physical arcade button                   |
+| 7   | USB disconnect (app must not crash)                   | PENDING — needs physical hardware                        |
+| 8   | USB reconnect (input resumes without app restart)     | PENDING — needs physical hardware                        |
+| 9   | PC restart                                            | PENDING — needs physical kiosk PC                        |
+| 10  | App restart                                           | PENDING — needs physical kiosk PC                        |
+| 11  | Several hundred to 1,000 simulated/manual game cycles | PENDING — needs physical arcade button, extended session |
 
 ### Endurance testing (SOW §46)
 
-| # | Check | Status |
-|---|-------|--------|
-| 1 | Multi-hour continuous operation (several hours) | PENDING — needs multi-hour wall-clock session |
-| 2 | No memory leak | PENDING — needs Chromium task manager / `process.getProcessMemoryInfo()` over hours |
-| 3 | No growing DOM nodes | PENDING — needs live DevTools inspection over hours |
-| 4 | No accumulating timers | PENDING — needs live inspection over hours |
-| 5 | No duplicate keyboard listeners | PENDING — needs live inspection over hours |
-| 6 | No audio resource leak | PENDING — needs live inspection over hours, and real audio assets (currently placeholders) |
-| 7 | No FPS degradation | PENDING — needs live monitoring over hours |
-| 8 | No storage corruption | PENDING — needs extended real-usage session against `electron-store` files |
-| 9 | No progressive slowdown | PENDING — needs multi-hour session |
+| #   | Check                                           | Status                                                                                     |
+| --- | ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 1   | Multi-hour continuous operation (several hours) | PENDING — needs multi-hour wall-clock session                                              |
+| 2   | No memory leak                                  | PENDING — needs Chromium task manager / `process.getProcessMemoryInfo()` over hours        |
+| 3   | No growing DOM nodes                            | PENDING — needs live DevTools inspection over hours                                        |
+| 4   | No accumulating timers                          | PENDING — needs live inspection over hours                                                 |
+| 5   | No duplicate keyboard listeners                 | PENDING — needs live inspection over hours                                                 |
+| 6   | No audio resource leak                          | PENDING — needs live inspection over hours, and real audio assets (currently placeholders) |
+| 7   | No FPS degradation                              | PENDING — needs live monitoring over hours                                                 |
+| 8   | No storage corruption                           | PENDING — needs extended real-usage session against `electron-store` files                 |
+| 9   | No progressive slowdown                         | PENDING — needs multi-hour session                                                         |
 
 **How to execute this section:** connect the real USB arcade-button
 encoder per `docs/hardware-setup.md`, deploy the packaged build
@@ -127,36 +127,36 @@ task manager, `chrome://gpu`, or `Logger` output) directly in this file.
 
 ## 5. SOW §55 Acceptance Criteria cross-check
 
-| Category | Item | Status |
-|---|---|---|
-| Gameplay | One button starts timer | VERIFIED (unit) — `GameEngine.test.ts`, `InputManager.test.ts` |
-| Gameplay | Same button stops timer | VERIFIED (unit) |
-| Gameplay | Timer displays exactly two decimals, no `s` suffix | VERIFIED (unit) — `ResultEngine.test.ts` |
-| Gameplay | Result appears immediately | VERIFIED (unit, state transition) |
-| Gameplay | Correct WIN/NEAR/OTHER classification | VERIFIED (unit) — boundary tests |
-| Gameplay | Automatic reset works | VERIFIED (unit) — auto-reset + stuck-RUNNING auto-cancel |
-| Hardware | USB HID arcade button works | PENDING — physical hardware |
-| Hardware | Held button doesn't immediately stop timer | VERIFIED (unit) + PENDING (physical confirmation) |
-| Hardware | Keyboard backup works | VERIFIED (unit) |
-| Hardware | Mouse/touch backup works | VERIFIED (unit) — `InputManager.test.ts`; now wired into the UI (`onPointerDown` on the Idle and Running screen containers, `App.tsx`), but PENDING manual click/touch confirmation on the booth |
-| Hardware | USB disconnect doesn't crash application | PENDING — physical hardware |
-| Timing | `performance.now()` is source of truth | VERIFIED (code review, prior tasks) |
-| Timing | Result NOT calculated from rendered frames | VERIFIED (code review, prior tasks) |
-| Timing | Full internal precision retained | VERIFIED (unit) — `ResultEngine.test.ts` |
-| Timing | Configurable ranges work | VERIFIED (unit) — `SettingsStore.test.ts`, `ResultEngine.test.ts` |
-| Timing | Boundary tests pass | VERIFIED (unit) |
-| Admin | Win/near range editable | VERIFIED (unit + prior task review) |
-| Admin | Sound editable | VERIFIED (prior task review) |
-| Admin | Auto reset editable | VERIFIED (prior task review) |
-| Admin | Winner feature editable | VERIFIED (prior task review) |
-| Admin | Settings survive restart | VERIFIED (unit) — `SettingsStore.test.ts` |
-| Admin | Button test available | VERIFIED (prior task review) + PENDING (physical confirmation) |
-| Winner System | Only winners can enter details | VERIFIED (unit) — `GameEngine.test.ts` |
-| Winner System | Entry is optional | VERIFIED (unit) — `skipWinnerEntry` |
-| Winner System | Name + law firm saved locally | VERIFIED (unit) — `WinnerStore.test.ts` |
-| Winner System | Idle screen can rotate winners | VERIFIED (prior task review) |
-| Winner System | Winners can be cleared | VERIFIED (unit) — `WinnerStore.test.ts` |
-| Winner System | Feature can be disabled | VERIFIED (unit) — `GameEngine.test.ts` |
+| Category      | Item                                               | Status                                                                                                                                                                                           |
+| ------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Gameplay      | One button starts timer                            | VERIFIED (unit) — `GameEngine.test.ts`, `InputManager.test.ts`                                                                                                                                   |
+| Gameplay      | Same button stops timer                            | VERIFIED (unit)                                                                                                                                                                                  |
+| Gameplay      | Timer displays exactly two decimals, no `s` suffix | VERIFIED (unit) — `ResultEngine.test.ts`                                                                                                                                                         |
+| Gameplay      | Result appears immediately                         | VERIFIED (unit, state transition)                                                                                                                                                                |
+| Gameplay      | Correct WIN/NEAR/OTHER classification              | VERIFIED (unit) — boundary tests                                                                                                                                                                 |
+| Gameplay      | Automatic reset works                              | VERIFIED (unit) — auto-reset + stuck-RUNNING auto-cancel                                                                                                                                         |
+| Hardware      | USB HID arcade button works                        | PENDING — physical hardware                                                                                                                                                                      |
+| Hardware      | Held button doesn't immediately stop timer         | VERIFIED (unit) + PENDING (physical confirmation)                                                                                                                                                |
+| Hardware      | Keyboard backup works                              | VERIFIED (unit)                                                                                                                                                                                  |
+| Hardware      | Mouse/touch backup works                           | VERIFIED (unit) — `InputManager.test.ts`; now wired into the UI (`onPointerDown` on the Idle and Running screen containers, `App.tsx`), but PENDING manual click/touch confirmation on the booth |
+| Hardware      | USB disconnect doesn't crash application           | PENDING — physical hardware                                                                                                                                                                      |
+| Timing        | `performance.now()` is source of truth             | VERIFIED (code review, prior tasks)                                                                                                                                                              |
+| Timing        | Result NOT calculated from rendered frames         | VERIFIED (code review, prior tasks)                                                                                                                                                              |
+| Timing        | Full internal precision retained                   | VERIFIED (unit) — `ResultEngine.test.ts`                                                                                                                                                         |
+| Timing        | Configurable ranges work                           | VERIFIED (unit) — `SettingsStore.test.ts`, `ResultEngine.test.ts`                                                                                                                                |
+| Timing        | Boundary tests pass                                | VERIFIED (unit)                                                                                                                                                                                  |
+| Admin         | Win/near range editable                            | VERIFIED (unit + prior task review)                                                                                                                                                              |
+| Admin         | Sound editable                                     | VERIFIED (prior task review)                                                                                                                                                                     |
+| Admin         | Auto reset editable                                | VERIFIED (prior task review)                                                                                                                                                                     |
+| Admin         | Winner feature editable                            | VERIFIED (prior task review)                                                                                                                                                                     |
+| Admin         | Settings survive restart                           | VERIFIED (unit) — `SettingsStore.test.ts`                                                                                                                                                        |
+| Admin         | Button test available                              | VERIFIED (prior task review) + PENDING (physical confirmation)                                                                                                                                   |
+| Winner System | Only winners can enter details                     | VERIFIED (unit) — `GameEngine.test.ts`                                                                                                                                                           |
+| Winner System | Entry is optional                                  | VERIFIED (unit) — `skipWinnerEntry`                                                                                                                                                              |
+| Winner System | Name + law firm saved locally                      | VERIFIED (unit) — `WinnerStore.test.ts`                                                                                                                                                          |
+| Winner System | Idle screen can rotate winners                     | VERIFIED (prior task review)                                                                                                                                                                     |
+| Winner System | Winners can be cleared                             | VERIFIED (unit) — `WinnerStore.test.ts`                                                                                                                                                          |
+| Winner System | Feature can be disabled                            | VERIFIED (unit) — `GameEngine.test.ts`                                                                                                                                                           |
 
 "VERIFIED (unit)" means covered by a passing automated test in this
 run. "VERIFIED (prior task review)" means implemented and reviewed in

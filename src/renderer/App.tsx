@@ -34,7 +34,7 @@ export default function App() {
 
   // Stable identity: a fresh callback would re-arm ResultScreen's celebration
   // timeout (and replay its sound) on every unrelated re-render.
-  const onProceed = useCallback(() => engine.proceedFromResult(performance.now()), [engine]);
+  const onProceed = useCallback(() => engine.proceedFromResult(), [engine]);
 
   // Never block rendering on the settings IPC: a screen that never renders is a
   // frozen kiosk. Defaults stand in until the real settings arrive.
@@ -46,9 +46,21 @@ export default function App() {
 
     switch (snapshot.state) {
       case GameState.IDLE:
-        return <IdleScreen rotationEnabled={active.winnerRotationEnabled} targetSeconds={active.target} onTrigger={backupTrigger} />;
+        return (
+          <IdleScreen
+            rotationEnabled={active.winnerRotationEnabled}
+            targetSeconds={active.target}
+            onTrigger={backupTrigger}
+          />
+        );
       case GameState.RUNNING:
-        return <RunningScreen displaySeconds={snapshot.displaySeconds} targetSeconds={active.target} onTrigger={backupTrigger} />;
+        return (
+          <RunningScreen
+            displaySeconds={snapshot.displaySeconds}
+            targetSeconds={active.target}
+            onTrigger={backupTrigger}
+          />
+        );
       case GameState.RESULT_WIN:
       case GameState.RESULT_NEAR:
       case GameState.RESULT_OTHER:
@@ -68,7 +80,6 @@ export default function App() {
             result={snapshot.result}
             onSaved={() => engine.skipWinnerEntry()}
             onSkip={() => engine.skipWinnerEntry()}
-            onActivity={() => engine.notifyActivity(performance.now())}
           />
         ) : null;
       default:

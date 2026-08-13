@@ -6,8 +6,12 @@ import { DEFAULT_SETTINGS } from '../types/settings';
 function makeEngine() {
   let running = false;
   return {
-    handleStart: vi.fn(() => { running = true; }),
-    handleStop: vi.fn(() => { running = false; }),
+    handleStart: vi.fn(() => {
+      running = true;
+    }),
+    handleStop: vi.fn(() => {
+      running = false;
+    }),
     isRunning: () => running,
   };
 }

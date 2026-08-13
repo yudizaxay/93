@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/main/main.ts", "src/main/preload.ts"],
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignore": ["src/renderer/types/ipc.ts"]
+}

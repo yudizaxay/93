@@ -61,7 +61,7 @@ export class SettingsStore {
 
   update(partial: Partial<GameSettings>): { ok: true; settings: GameSettings } | { ok: false; errors: string[] } {
     const defined = Object.fromEntries(
-      Object.entries(partial).filter(([, v]) => v !== undefined),
+      Object.entries(partial).filter(([, v]) => v !== undefined)
     ) as Partial<GameSettings>;
     const candidate: GameSettings = { ...DEFAULT_SETTINGS, ...this.current, ...defined };
     const errors = validate(candidate);

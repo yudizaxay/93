@@ -14,7 +14,16 @@ type Tab = 'rules' | 'audio' | 'input' | 'display' | 'stats';
 // target. A stroked line-icon always renders identically and inherits the
 // tab's current text color for free.
 function TabIcon({ id }: { id: Tab }) {
-  const common = { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  const common = {
+    width: 16,
+    height: 16,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 2,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+  };
   switch (id) {
     case 'rules':
       return (
@@ -56,7 +65,17 @@ function TabIcon({ id }: { id: Tab }) {
 
 function DownloadIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M12 3v12M7 10l5 5 5-5M4 21h16" />
     </svg>
   );
@@ -64,7 +83,17 @@ function DownloadIcon() {
 
 function TrashIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" />
     </svg>
   );
@@ -72,7 +101,16 @@ function TrashIcon() {
 
 function SettingsIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
       <path d="M4 6h6M4 12h12M4 18h9" />
       <circle cx="14" cy="6" r="2" />
       <circle cx="18" cy="18" r="2" />
@@ -149,11 +187,9 @@ export function AdminPanel({
     }
   }, [tab]);
 
-  const field = (key: keyof GameSettings) =>
-    draft[key] !== undefined ? draft[key] : settings[key];
+  const field = (key: keyof GameSettings) => (draft[key] !== undefined ? draft[key] : settings[key]);
 
-  const setField = (key: keyof GameSettings, value: unknown) =>
-    setDraft((d) => ({ ...d, [key]: value }));
+  const setField = (key: keyof GameSettings, value: unknown) => setDraft((d) => ({ ...d, [key]: value }));
 
   const toggleWinners = () => setShowWinners((v) => !v);
 
@@ -212,11 +248,7 @@ export function AdminPanel({
         <div className="admin-tabs-wrap">
           <div className="admin-tabs">
             {TABS.map((t) => (
-              <button
-                key={t.id}
-                className={`admin-tab${tab === t.id ? ' active' : ''}`}
-                onClick={() => setTab(t.id)}
-              >
+              <button key={t.id} className={`admin-tab${tab === t.id ? ' active' : ''}`} onClick={() => setTab(t.id)}>
                 <TabIcon id={t.id} /> {t.label}
               </button>
             ))}
@@ -229,14 +261,22 @@ export function AdminPanel({
               <div className="admin-grid-2">
                 <div className="admin-card">
                   <label className="admin-card-label">TARGET TIME (SECONDS):</label>
-                  <input type="number" step="0.001" value={field('target') as number}
-                    onChange={(e) => setField('target', Number(e.target.value))} />
+                  <input
+                    type="number"
+                    step="0.001"
+                    value={field('target') as number}
+                    onChange={(e) => setField('target', Number(e.target.value))}
+                  />
                   <p className="admin-hint">Default 0.93 represents the 9-3 Plaintiff Verdict.</p>
                 </div>
                 <div className="admin-card">
                   <label className="admin-card-label">AUTO-RESET DELAY (SECONDS):</label>
-                  <input type="number" min="1" value={(field('autoResetMs') as number) / 1000}
-                    onChange={(e) => setField('autoResetMs', Number(e.target.value) * 1000)} />
+                  <input
+                    type="number"
+                    min="1"
+                    value={(field('autoResetMs') as number) / 1000}
+                    onChange={(e) => setField('autoResetMs', Number(e.target.value) * 1000)}
+                  />
                   <p className="admin-hint">Seconds before screen resets automatically for next player.</p>
                 </div>
               </div>
@@ -244,29 +284,53 @@ export function AdminPanel({
               <div className="admin-card">
                 <label className="admin-card-label">TOLERANCE &amp; DIFFICULTY RANGES:</label>
                 <div className="admin-grid-2">
-                  <label className="admin-subfield">Near Miss Lower Bound (s):
-                    <input type="number" step="0.001" value={field('nearMin') as number}
-                      onChange={(e) => setField('nearMin', Number(e.target.value))} />
+                  <label className="admin-subfield">
+                    Near Miss Lower Bound (s):
+                    <input
+                      type="number"
+                      step="0.001"
+                      value={field('nearMin') as number}
+                      onChange={(e) => setField('nearMin', Number(e.target.value))}
+                    />
                   </label>
-                  <label className="admin-subfield">Near Miss Upper Bound (s):
-                    <input type="number" step="0.001" value={field('nearMax') as number}
-                      onChange={(e) => setField('nearMax', Number(e.target.value))} />
+                  <label className="admin-subfield">
+                    Near Miss Upper Bound (s):
+                    <input
+                      type="number"
+                      step="0.001"
+                      value={field('nearMax') as number}
+                      onChange={(e) => setField('nearMax', Number(e.target.value))}
+                    />
                   </label>
-                  <label className="admin-subfield">Win Window Lower Bound (s):
-                    <input type="number" step="0.001" value={field('winMin') as number}
-                      onChange={(e) => setField('winMin', Number(e.target.value))} />
+                  <label className="admin-subfield">
+                    Win Window Lower Bound (s):
+                    <input
+                      type="number"
+                      step="0.001"
+                      value={field('winMin') as number}
+                      onChange={(e) => setField('winMin', Number(e.target.value))}
+                    />
                   </label>
-                  <label className="admin-subfield">Win Window Upper Bound (s):
-                    <input type="number" step="0.001" value={field('winMax') as number}
-                      onChange={(e) => setField('winMax', Number(e.target.value))} />
+                  <label className="admin-subfield">
+                    Win Window Upper Bound (s):
+                    <input
+                      type="number"
+                      step="0.001"
+                      value={field('winMax') as number}
+                      onChange={(e) => setField('winMax', Number(e.target.value))}
+                    />
                   </label>
                 </div>
               </div>
 
               <div className="admin-card">
                 <label className="admin-card-label">GRAND PRIZE HEADER SUBTITLE:</label>
-                <input type="text" maxLength={40} value={field('winSubtitleText') as string}
-                  onChange={(e) => setField('winSubtitleText', e.target.value)} />
+                <input
+                  type="text"
+                  maxLength={40}
+                  value={field('winSubtitleText') as string}
+                  onChange={(e) => setField('winSubtitleText', e.target.value)}
+                />
               </div>
 
               <div className="admin-toggle-row">
@@ -275,16 +339,22 @@ export function AdminPanel({
                     <strong>Capture Details on Win</strong>
                     <p className="admin-hint">Ask winners for Name/Law Firm/Email after a win.</p>
                   </div>
-                  <input type="checkbox" checked={field('winnerCaptureEnabled') as boolean}
-                    onChange={(e) => setField('winnerCaptureEnabled', e.target.checked)} />
+                  <input
+                    type="checkbox"
+                    checked={field('winnerCaptureEnabled') as boolean}
+                    onChange={(e) => setField('winnerCaptureEnabled', e.target.checked)}
+                  />
                 </label>
                 <label className="admin-toggle">
                   <div>
                     <strong>Idle Winner Rotation</strong>
                     <p className="admin-hint">Show recent winner names on the idle screen.</p>
                   </div>
-                  <input type="checkbox" checked={field('winnerRotationEnabled') as boolean}
-                    onChange={(e) => setField('winnerRotationEnabled', e.target.checked)} />
+                  <input
+                    type="checkbox"
+                    checked={field('winnerRotationEnabled') as boolean}
+                    onChange={(e) => setField('winnerRotationEnabled', e.target.checked)}
+                  />
                 </label>
                 <label className="admin-toggle">
                   <div>
@@ -294,8 +364,11 @@ export function AdminPanel({
                       shown on the public idle rotation, only in Booth Stats.
                     </p>
                   </div>
-                  <input type="checkbox" checked={field('captureOnLossEnabled') as boolean}
-                    onChange={(e) => setField('captureOnLossEnabled', e.target.checked)} />
+                  <input
+                    type="checkbox"
+                    checked={field('captureOnLossEnabled') as boolean}
+                    onChange={(e) => setField('captureOnLossEnabled', e.target.checked)}
+                  />
                 </label>
               </div>
             </>
@@ -308,23 +381,32 @@ export function AdminPanel({
                   <strong>Sound Effects &amp; Fanfare</strong>
                   <p className="admin-hint">Play procedural audio on start, win, near-miss, and reset.</p>
                 </div>
-                <input type="checkbox" checked={field('soundEnabled') as boolean}
+                <input
+                  type="checkbox"
+                  checked={field('soundEnabled') as boolean}
                   onChange={(e) => {
                     setField('soundEnabled', e.target.checked);
                     audioManager.setEnabled(e.target.checked);
-                  }} />
+                  }}
+                />
               </label>
 
               <div className="admin-card">
                 <label className="admin-card-label">
                   MASTER AUDIO VOLUME ({Math.round((field('soundVolume') as number) * 100)}%):
                 </label>
-                <input type="range" min="0" max="1" step="0.05" value={field('soundVolume') as number}
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={field('soundVolume') as number}
                   onChange={(e) => {
                     const vol = Number(e.target.value);
                     setField('soundVolume', vol);
                     audioManager.setVolume(vol);
-                  }} />
+                  }}
+                />
               </div>
 
               <div className="admin-card">
@@ -350,18 +432,23 @@ export function AdminPanel({
                   <option value="Enter">Enter Key</option>
                 </select>
                 <p className="admin-hint">
-                  Most USB arcade buttons emulate a standard keyboard Spacebar or Enter key. Select your USB
-                  encoder's signal key.
+                  Most USB arcade buttons emulate a standard keyboard Spacebar or Enter key. Select your USB encoder's
+                  signal key.
                 </p>
               </div>
 
               <label className="admin-card admin-toggle">
                 <div>
                   <strong>Allow Screen Touch/Mouse Click</strong>
-                  <p className="admin-hint">Allow attendees to tap the on-screen button if a touchscreen monitor is present.</p>
+                  <p className="admin-hint">
+                    Allow attendees to tap the on-screen button if a touchscreen monitor is present.
+                  </p>
                 </div>
-                <input type="checkbox" checked={field('allowManualTrigger') as boolean}
-                  onChange={(e) => setField('allowManualTrigger', e.target.checked)} />
+                <input
+                  type="checkbox"
+                  checked={field('allowManualTrigger') as boolean}
+                  onChange={(e) => setField('allowManualTrigger', e.target.checked)}
+                />
               </label>
 
               <button className="admin-secondary-action" onClick={() => setShowHardwareTest(true)}>
@@ -395,8 +482,11 @@ export function AdminPanel({
                   <strong>Hide Mouse Cursor in Kiosk Mode</strong>
                   <p className="admin-hint">Keeps the display clean on the 43" booth TV screen.</p>
                 </div>
-                <input type="checkbox" checked={field('hideCursor') as boolean}
-                  onChange={(e) => setField('hideCursor', e.target.checked)} />
+                <input
+                  type="checkbox"
+                  checked={field('hideCursor') as boolean}
+                  onChange={(e) => setField('hideCursor', e.target.checked)}
+                />
               </label>
             </>
           )}
@@ -431,7 +521,7 @@ export function AdminPanel({
               </div>
 
               <div className="admin-secondary-actions">
-                <button onClick={() => setLogs(logs ? null : logger?.getRecent() ?? [])}>
+                <button onClick={() => setLogs(logs ? null : (logger?.getRecent() ?? []))}>
                   {logs ? 'HIDE LOGS' : 'VIEW LOGS'}
                 </button>
                 <button onClick={toggleWinners}>{showWinners ? 'HIDE WINNERS' : 'VIEW WINNERS'}</button>
@@ -440,23 +530,33 @@ export function AdminPanel({
 
               {logs && (
                 <ul className="admin-logs">
-                  {logs.length === 0
-                    ? <li>NO EVENTS LOGGED</li>
-                    : logs.slice(-25).reverse().map((entry, i) => (
-                        <li key={`${entry.timestamp}-${i}`}>{entry.timestamp} {entry.event}</li>
-                      ))}
+                  {logs.length === 0 ? (
+                    <li>NO EVENTS LOGGED</li>
+                  ) : (
+                    logs
+                      .slice(-25)
+                      .reverse()
+                      .map((entry, i) => (
+                        <li key={`${entry.timestamp}-${i}`}>
+                          {entry.timestamp} {entry.event}
+                        </li>
+                      ))
+                  )}
                 </ul>
               )}
 
               {showWinners && (
                 <ul className="admin-winners">
-                  {winners.length === 0
-                    ? <li>NO WINNERS YET</li>
-                    : winners.map((w) => (
-                        <li key={w.id}>
-                          {w.category !== 'WIN' && <span className="admin-lead-tag">LEAD</span>} {w.name} — {w.lawFirm || '—'} — {w.email || '—'}
-                        </li>
-                      ))}
+                  {winners.length === 0 ? (
+                    <li>NO WINNERS YET</li>
+                  ) : (
+                    winners.map((w) => (
+                      <li key={w.id}>
+                        {w.category !== 'WIN' && <span className="admin-lead-tag">LEAD</span>} {w.name} —{' '}
+                        {w.lawFirm || '—'} — {w.email || '—'}
+                      </li>
+                    ))
+                  )}
                 </ul>
               )}
             </>
@@ -464,11 +564,17 @@ export function AdminPanel({
         </div>
 
         {errors.length > 0 && (
-          <ul className="admin-errors">{errors.map((e) => <li key={e}>{e}</li>)}</ul>
+          <ul className="admin-errors">
+            {errors.map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ul>
         )}
 
         <div className="admin-actions">
-          <button className="admin-apply-button" onClick={save}>DONE &amp; APPLY</button>
+          <button className="admin-apply-button" onClick={save}>
+            DONE &amp; APPLY
+          </button>
         </div>
       </div>
       {showHardwareTest && (

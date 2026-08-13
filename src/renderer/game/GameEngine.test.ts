@@ -56,7 +56,7 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(1930);
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
   });
 
@@ -65,7 +65,7 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(1930);
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     expect(engine.getSnapshot().state).toBe(GameState.IDLE);
   });
 
@@ -83,8 +83,8 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(1930);
-    engine.proceedFromResult(2500); // -> WINNER_ENTRY
-    engine.proceedFromResult(2600); // duplicate (UI timeout + watchdog) must not reset
+    engine.proceedFromResult(); // -> WINNER_ENTRY
+    engine.proceedFromResult(); // duplicate (UI timeout + watchdog) must not reset
     expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
   });
 
@@ -124,7 +124,7 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(2170); // RESULT_OTHER
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
   });
 
@@ -142,7 +142,7 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(1930); // RESULT_WIN
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     expect(engine.getSnapshot().state).toBe(GameState.IDLE);
   });
 
@@ -158,7 +158,7 @@ describe('GameEngine', () => {
     const engine = new GameEngine(() => DEFAULT_SETTINGS);
     engine.handleStart(1000);
     engine.handleStop(1930);
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     engine.skipWinnerEntry();
     expect(engine.getSnapshot().state).toBe(GameState.IDLE);
   });
@@ -175,30 +175,16 @@ describe('GameEngine', () => {
     expect(cb.mock.calls.length).toBe(callCountAfterUnsub);
   });
 
-  it('auto-skips WINNER_ENTRY back to IDLE after winnerEntryTimeoutMs of inactivity via tick()', () => {
-    const settings = { ...DEFAULT_SETTINGS, winnerEntryTimeoutMs: 8000 };
+  it('WINNER_ENTRY never times out via tick() — only skipWinnerEntry()/save can leave it', () => {
+    const settings = { ...DEFAULT_SETTINGS, autoResetMs: 1000 };
     const engine = new GameEngine(() => settings);
     engine.handleStart(1000);
     engine.handleStop(1930);
-    engine.proceedFromResult(2500);
+    engine.proceedFromResult();
     expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
-    engine.tick(2500);
+    engine.tick(1_000_000); // arbitrarily long dwell — a winner/lead can take as long as they need to fill in the form
     expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
-    engine.tick(10501); // 8001ms after entering WINNER_ENTRY at 2500
-    expect(engine.getSnapshot().state).toBe(GameState.IDLE);
-  });
-
-  it('notifyActivity() resets the WINNER_ENTRY timeout so active typing is not interrupted', () => {
-    const settings = { ...DEFAULT_SETTINGS, winnerEntryTimeoutMs: 8000 };
-    const engine = new GameEngine(() => settings);
-    engine.handleStart(1000);
-    engine.handleStop(1930);
-    engine.proceedFromResult(2500);
-    engine.tick(9000); // 6500ms in, still within timeout
-    engine.notifyActivity(9000); // resets the clock
-    engine.tick(16000); // 7000ms after activity, still within new window
-    expect(engine.getSnapshot().state).toBe(GameState.WINNER_ENTRY);
-    engine.tick(17001); // 8001ms after activity
+    engine.skipWinnerEntry();
     expect(engine.getSnapshot().state).toBe(GameState.IDLE);
   });
 });

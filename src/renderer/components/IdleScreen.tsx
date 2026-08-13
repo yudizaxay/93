@@ -1,5 +1,6 @@
 import { WinnerRotation } from './WinnerRotation';
 import { Dial } from './Dial';
+import { BrandHeader } from './BrandHeader';
 import './IdleScreen.css';
 
 /** onTrigger is the mouse/touch backup input path — same toggle as the arcade button. */
@@ -14,10 +15,7 @@ export function IdleScreen({
 }) {
   return (
     <div className="idle-screen" onPointerDown={onTrigger}>
-      <header className="idle-brand">
-        <span className="idle-seal" aria-hidden="true">C</span>
-        <span className="idle-brand-text">COALITION COURT REPORTERS</span>
-      </header>
+      <BrandHeader />
 
       <div className="idle-layout">
         <div className="idle-eyebrow">DOCKET NO. 0.93</div>

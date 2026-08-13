@@ -6,7 +6,9 @@ function makeMemoryAdapter(initial?: unknown): PersistenceAdapter {
   let value = initial;
   return {
     read: () => value,
-    write: (v) => { value = v; },
+    write: (v) => {
+      value = v;
+    },
   };
 }
 
@@ -22,18 +24,24 @@ describe('SettingsStore', () => {
   });
 
   it('merges a persisted object missing newer fields over defaults', () => {
-    const store = new SettingsStore(makeMemoryAdapter({
-      target: 0.5, winMin: 0.4, winMax: 0.6, nearMin: 0.3, nearMax: 0.7,
-      autoResetMs: 4000, buttonKey: 'Enter',
-      // debounceMs / lockoutMs / maxRunningMs / winnerEntryTimeoutMs absent (older build)
-    }));
+    const store = new SettingsStore(
+      makeMemoryAdapter({
+        target: 0.5,
+        winMin: 0.4,
+        winMax: 0.6,
+        nearMin: 0.3,
+        nearMax: 0.7,
+        autoResetMs: 4000,
+        buttonKey: 'Enter',
+        // debounceMs / lockoutMs / maxRunningMs absent (older build)
+      })
+    );
     const s = store.get();
     expect(s.target).toBe(0.5);
     expect(s.buttonKey).toBe('Enter');
     expect(s.debounceMs).toBe(DEFAULT_SETTINGS.debounceMs);
     expect(s.lockoutMs).toBe(DEFAULT_SETTINGS.lockoutMs);
     expect(s.maxRunningMs).toBe(DEFAULT_SETTINGS.maxRunningMs);
-    expect(s.winnerEntryTimeoutMs).toBe(DEFAULT_SETTINGS.winnerEntryTimeoutMs);
   });
 
   it('update() merges valid partial changes and persists them', () => {
@@ -82,7 +90,9 @@ describe('SettingsStore', () => {
   it('does not throw if the adapter write() throws (gameplay must not crash)', () => {
     const adapter: PersistenceAdapter = {
       read: () => undefined,
-      write: () => { throw new Error('disk full'); },
+      write: () => {
+        throw new Error('disk full');
+      },
     };
     const store = new SettingsStore(adapter);
     expect(() => store.update({ target: 0.5, winMin: 0.4, winMax: 0.6 })).not.toThrow();

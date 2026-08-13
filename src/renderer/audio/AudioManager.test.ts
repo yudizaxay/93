@@ -4,7 +4,10 @@ import { AudioManager } from './AudioManager';
 class FakeAudio {
   volume = 1;
   played = false;
-  play = vi.fn(() => { this.played = true; return Promise.resolve(); });
+  play = vi.fn(() => {
+    this.played = true;
+    return Promise.resolve();
+  });
 }
 
 describe('AudioManager', () => {

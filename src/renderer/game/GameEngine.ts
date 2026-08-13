@@ -20,7 +20,10 @@ export class GameEngine {
   private listeners = new Set<Listener>();
   private resultEnteredAt: number | null = null;
 
-  constructor(private getSettings: () => GameSettings, private logger?: Logger) {
+  constructor(
+    private getSettings: () => GameSettings,
+    private logger?: Logger
+  ) {
     this.timer.onTick((display) => {
       this.displaySeconds = display;
       this.notify();
@@ -71,15 +74,15 @@ export class GameEngine {
       result.category === 'WIN'
         ? GameState.RESULT_WIN
         : result.category === 'NEAR'
-        ? GameState.RESULT_NEAR
-        : GameState.RESULT_OTHER;
+          ? GameState.RESULT_NEAR
+          : GameState.RESULT_OTHER;
     this.setState(nextState);
     this.logger?.log('GAME_STOPPED');
     this.logger?.log(`RESULT_${result.category}` as LogEvent);
   }
 
   /** Called by ResultScreen after its celebration/display beat, or by tick()'s watchdog. */
-  proceedFromResult(nowMs: number): void {
+  proceedFromResult(): void {
     if (
       this.state !== GameState.RESULT_WIN &&
       this.state !== GameState.RESULT_NEAR &&
@@ -94,22 +97,18 @@ export class GameEngine {
       ((this.state === GameState.RESULT_NEAR || this.state === GameState.RESULT_OTHER) &&
         settings.captureOnLossEnabled);
     if (shouldCapture) {
-      this.resultEnteredAt = nowMs;
+      // No resultEnteredAt bookkeeping here — WINNER_ENTRY has no watchdog timeout.
       this.setState(GameState.WINNER_ENTRY);
       return;
     }
     this.returnToIdle();
   }
 
+  /** Only exit from WINNER_ENTRY — Skip/Save button, never a timer. Booth staff
+   * or a winner filling this in at an expo can take as long as they need. */
   skipWinnerEntry(): void {
     if (this.state !== GameState.WINNER_ENTRY) return;
     this.returnToIdle();
-  }
-
-  notifyActivity(nowMs: number): void {
-    if (this.state === GameState.WINNER_ENTRY) {
-      this.resultEnteredAt = nowMs;
-    }
   }
 
   private returnToIdle(): void {
@@ -136,27 +135,21 @@ export class GameEngine {
       return;
     }
 
+    // WINNER_ENTRY deliberately has no watchdog here — see skipWinnerEntry().
     if (
       (this.state === GameState.RESULT_WIN ||
         this.state === GameState.RESULT_NEAR ||
-        this.state === GameState.RESULT_OTHER ||
-        this.state === GameState.WINNER_ENTRY) &&
+        this.state === GameState.RESULT_OTHER) &&
       this.resultEnteredAt !== null
     ) {
       const settings = this.getSettings();
-      const timeoutMs =
-        this.state === GameState.WINNER_ENTRY ? settings.winnerEntryTimeoutMs : settings.autoResetMs;
-      if (nowMs - this.resultEnteredAt >= timeoutMs) {
-        if (this.state === GameState.WINNER_ENTRY) {
-          this.returnToIdle();
-        } else {
-          // Watchdog for all three result states: the UI normally advances WIN
-          // after its celebration beat, but the engine must never depend on the
-          // UI to leave a state — and NEAR/OTHER must also run through
-          // proceedFromResult so captureOnLossEnabled gets a chance to route
-          // into WINNER_ENTRY instead of straight back to IDLE.
-          this.proceedFromResult(nowMs);
-        }
+      if (nowMs - this.resultEnteredAt >= settings.autoResetMs) {
+        // Watchdog for all three result states: the UI normally advances WIN
+        // after its celebration beat, but the engine must never depend on the
+        // UI to leave a state — and NEAR/OTHER must also run through
+        // proceedFromResult so captureOnLossEnabled gets a chance to route
+        // into WINNER_ENTRY instead of straight back to IDLE.
+        this.proceedFromResult();
       }
     }
   }

@@ -1,0 +1,12 @@
+dist
+dist-electron
+release
+node_modules
+93-media
+docs/screenshots
+package-lock.json
+
+# Point-in-time planning/spec records, not living docs — leave their original
+# formatting untouched rather than diff-noise them.
+SOW_93.md
+docs/superpowers/

@@ -19,7 +19,7 @@ export function WinnerRotation({ enabled }: { enabled: boolean }) {
   useEffect(() => {
     if (!enabled || winners.length === 0) return;
     const interval = setInterval(() => {
-      setIndex((i) => (i + 2) % (winners.length + 1) - 1);
+      setIndex((i) => ((i + 2) % (winners.length + 1)) - 1);
     }, ROTATION_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [enabled, winners]);

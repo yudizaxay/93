@@ -1,0 +1,32 @@
+/* Absolutely positioned so it pins to the very top of any full-screen host
+   (idle/result/winner-entry) without disturbing that screen's own centered
+   flex layout — the host only needs `position: relative`. */
+.brand-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: clamp(1rem, 2.4vh, 1.6rem) clamp(1.5rem, 3vw, 2.5rem) 0;
+  opacity: 0.95;
+}
+
+/* The client-supplied badge bakes in fine dial ticks and small text — it
+   needs real size to read as anything but a blob, unlike the old plain "C".
+   No border-radius: the art already carries its own rounded-square shape
+   with transparent corners (see 93-media/processed/), so a circular CSS
+   mask on top would just crop it a second time. */
+.brand-seal {
+  width: clamp(4rem, 7.5vh, 5.5rem);
+  height: clamp(4rem, 7.5vh, 5.5rem);
+}
+
+.brand-text {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  letter-spacing: 0.16em;
+}

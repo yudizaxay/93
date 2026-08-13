@@ -20,11 +20,17 @@ type ToneStage = {
  */
 const SCORES: Record<SoundName, ToneStage[]> = {
   // Rising sweep as the timer starts — signals "go".
-  start: [{ freq: 320, atMs: 0, durationMs: 90, type: 'sine' }, { freq: 640, atMs: 60, durationMs: 90, type: 'sine' }],
+  start: [
+    { freq: 320, atMs: 0, durationMs: 90, type: 'sine' },
+    { freq: 640, atMs: 60, durationMs: 90, type: 'sine' },
+  ],
   // Short, dry click — the tactile "stop" acknowledgement (the buzzer).
   stop: [{ freq: 180, atMs: 0, durationMs: 45, type: 'square', gain: 0.5 }],
   // A brief descending two-note dip — "so close, but not quite".
-  near: [{ freq: 520, atMs: 0, durationMs: 110, type: 'triangle' }, { freq: 420, atMs: 90, durationMs: 140, type: 'triangle' }],
+  near: [
+    { freq: 520, atMs: 0, durationMs: 110, type: 'triangle' },
+    { freq: 420, atMs: 90, durationMs: 140, type: 'triangle' },
+  ],
   // A theatrical "you lose" riff for the defense verdict: four quick
   // descending square-wave notes (the comedic "stumble"), then a classic
   // two-part "womp womp" sad-trombone slide for the punchline. Captures the

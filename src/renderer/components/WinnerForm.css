@@ -7,10 +7,10 @@
   align-items: center;
   justify-content: center;
   gap: clamp(1rem, 2.4vh, 1.8rem);
-  padding: clamp(1rem, 3vh, 2rem);
+  /* Clears the absolutely-positioned BrandHeader pinned at the very top. */
+  padding: clamp(4rem, 9.5vh, 6.5rem) clamp(1rem, 3vh, 2rem) clamp(1rem, 3vh, 2rem);
   background:
-    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(199, 160, 69, 0.14), transparent 70%),
-    var(--ink, #0b0b0c);
+    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(199, 160, 69, 0.14), transparent 70%), var(--ink, #0b0b0c);
   color: var(--parchment, #ede3d0);
   text-align: center;
   overflow: hidden;
@@ -18,8 +18,14 @@
 }
 
 @keyframes winner-form-in {
-  from { opacity: 0; transform: translateY(1.2rem) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .winner-form-eyebrow {
@@ -46,7 +52,11 @@
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
 }
 
-.winner-fields { display: flex; flex-direction: column; gap: 0.85rem; }
+.winner-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
 
 .winner-fields label {
   text-align: left;
@@ -58,7 +68,9 @@
   transition: color 0.15s ease;
 }
 
-.winner-fields label.active { color: var(--brass, #c7a045); }
+.winner-fields label.active {
+  color: var(--brass, #c7a045);
+}
 
 .winner-input {
   margin-top: 0.4rem;
@@ -70,7 +82,9 @@
   background: rgba(11, 11, 12, 0.55);
   color: var(--parchment, #ede3d0);
   font-family: var(--font-body, sans-serif);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
   /* A field is capped (see FIELD_MAX_LENGTH in WinnerForm.tsx), but this is
      the layout-safety net: text can never spill out of the card no matter
      what lands in the field. */
@@ -100,7 +114,11 @@
   text-transform: none;
 }
 
-.winner-actions { display: flex; gap: 1rem; margin-top: 0.4rem; }
+.winner-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
 
 .winner-actions button {
   font-family: var(--font-mono, ui-monospace, monospace);
@@ -111,10 +129,15 @@
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    opacity 0.12s ease;
 }
 
-.winner-actions button:active { transform: scale(0.96); }
+.winner-actions button:active {
+  transform: scale(0.96);
+}
 
 .winner-actions button[type='submit'],
 .winner-actions button:first-child {
@@ -135,4 +158,6 @@
   border: 1px solid var(--panel-line, #2a221c);
 }
 
-.winner-actions button:last-child:hover { color: var(--parchment, #ede3d0); }
+.winner-actions button:last-child:hover {
+  color: var(--parchment, #ede3d0);
+}

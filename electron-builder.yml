@@ -6,9 +6,17 @@ files:
   - dist/**/*
   - dist-electron/**/*
 win:
+  # processed/ = the client-supplied 93-media/ art with its black square corners
+  # keyed out to transparent (see 93-media/processed/README.md) — the raw
+  # originals rendered with an ugly black-cornered halo once the OS applied its
+  # own icon rounding on top of the badge's own rounded corners.
+  icon: 93-media/processed/93-verdict-challenge.ico
   target:
     - target: nsis
     - target: portable
+mac:
+  # 1024x1024 source PNG — electron-builder auto-generates the .icns from it.
+  icon: 93-media/processed/icon-1024.png
 nsis:
   oneClick: true
   perMachine: true

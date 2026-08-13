@@ -3,7 +3,12 @@ import { WinnerStore } from './WinnerStore';
 
 function makeMemoryAdapter(initial?: unknown) {
   let value = initial;
-  return { read: () => value, write: (v: unknown) => { value = v; } };
+  return {
+    read: () => value,
+    write: (v: unknown) => {
+      value = v;
+    },
+  };
 }
 
 describe('WinnerStore', () => {
@@ -56,7 +61,9 @@ describe('WinnerStore', () => {
   it('does not throw if the adapter write() throws', () => {
     const adapter = {
       read: () => undefined,
-      write: () => { throw new Error('disk full'); },
+      write: () => {
+        throw new Error('disk full');
+      },
     };
     const store = new WinnerStore(adapter);
     expect(() => store.add('John', 'Firm', 'john@example.com', 0.93, '0.93')).not.toThrow();

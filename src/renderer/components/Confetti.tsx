@@ -1,7 +1,14 @@
 import { useEffect, useRef } from 'react';
 import './Confetti.css';
 
-interface Particle { x: number; y: number; vx: number; vy: number; color: string; size: number; }
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  color: string;
+  size: number;
+}
 
 const COLORS = ['#c8102e', '#d4af37', '#ffffff'];
 

@@ -21,7 +21,9 @@ export function HardwareTestPanel({ buttonKey, onClose }: { buttonKey: string; o
         ) : (
           <>
             <p>USB BUTTON DETECTED ✓</p>
-            <p>KEY: {detected.key} (configured: {buttonKey})</p>
+            <p>
+              KEY: {detected.key} (configured: {buttonKey})
+            </p>
             <p>INPUT RECEIVED at {detected.timestamp.toFixed(2)}ms (diagnostic only)</p>
           </>
         )}

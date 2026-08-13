@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Timer } from './Timer';
-import { Dial, secondsToFillPercent } from './Dial';
+import { Dial } from './Dial';
+import { secondsToFillPercent } from '../game/dialMath';
 import { audioManager } from '../audio/AudioManager';
 import './RunningScreen.css';
 

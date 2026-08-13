@@ -1,15 +1,5 @@
+import { secondsToFillPercent } from '../game/dialMath';
 import './Dial.css';
-
-// Purely visual: how many seconds correspond to a full ring. Shared by
-// RunningScreen and ResultScreen so the ring appears to "freeze" exactly
-// where it stopped rather than jumping to an unrelated position. Never
-// feeds the game's result calculation, which stays entirely in
-// GameEngine/ResultEngine.
-export const DIAL_VISUAL_MAX_SECONDS = 1.6;
-
-export function secondsToFillPercent(seconds: number): number {
-  return (seconds / DIAL_VISUAL_MAX_SECONDS) * 100;
-}
 
 // The ring's fill is a conic-gradient starting at 9 o'clock (`from -90deg`)
 // and sweeping clockwise, so a fill percentage P ends at clock-angle
@@ -52,9 +42,7 @@ export function Dial({
 }) {
   const clamped = Math.max(0, Math.min(100, fillPercent));
   const targetAngle = percentToClockAngle(secondsToFillPercent(targetSeconds ?? 0.93));
-  const classes = ['dial', `dial-${tone}`, punch && 'dial-punch', ambient && 'dial-ambient']
-    .filter(Boolean)
-    .join(' ');
+  const classes = ['dial', `dial-${tone}`, punch && 'dial-punch', ambient && 'dial-ambient'].filter(Boolean).join(' ');
   return (
     <div
       className={classes}

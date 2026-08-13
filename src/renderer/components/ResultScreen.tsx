@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { GameResult } from '../types/game';
 import { audioManager } from '../audio/AudioManager';
 import { Confetti } from './Confetti';
-import { Dial, secondsToFillPercent } from './Dial';
+import { Dial } from './Dial';
+import { secondsToFillPercent } from '../game/dialMath';
+import { BrandHeader } from './BrandHeader';
 import './ResultScreen.css';
 
 function formatDifference(diff: number): string {
@@ -60,6 +62,7 @@ export function ResultScreen({
         {buzzer}
         <Confetti active={true} />
         <div className="result-screen result-win">
+          <BrandHeader />
           <Dial fillPercent={100} targetSeconds={targetSeconds} tone="brass" punch>
             <div className="result-value">{result.displaySeconds}</div>
           </Dial>
@@ -80,6 +83,7 @@ export function ResultScreen({
       <>
         {buzzer}
         <div className="result-screen result-near">
+          <BrandHeader />
           <Dial fillPercent={fillPercent} targetSeconds={targetSeconds} tone="dim" punch>
             <div className="result-value">{result.displaySeconds}</div>
           </Dial>
@@ -94,6 +98,7 @@ export function ResultScreen({
     <>
       {buzzer}
       <div className="result-screen result-other">
+        <BrandHeader />
         <Dial fillPercent={fillPercent} targetSeconds={targetSeconds} tone="dim" punch>
           <div className="result-value">{result.displaySeconds}</div>
         </Dial>

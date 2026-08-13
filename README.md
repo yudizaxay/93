@@ -6,12 +6,31 @@ stop, and tries to land exactly on **0.93 seconds**. Fullscreen Electron + React
 kiosk app for a Windows mini PC driving a 43" landscape TV at trade-show booths.
 Runs **100% offline** after install.
 
+## App icon
+
+| 256px                              | 128px                              | 64px                              |
+| ---------------------------------- | ---------------------------------- | --------------------------------- |
+| ![App icon](93-media/icon-256.png) | ![App icon](93-media/icon-128.png) | ![App icon](93-media/icon-64.png) |
+
+Client-supplied, full icon set under `93-media/` (16px through 1024px PNGs,
+Windows `.ico`, and an `.icns` source PNG). Wired in as:
+
+- **Windows installer/app icon** — `win.icon` in `electron-builder.yml` →
+  `93-media/93-verdict-challenge.ico`.
+- **macOS app icon** — `mac.icon` in `electron-builder.yml` →
+  `93-media/icon-1024.png` (electron-builder auto-generates the `.icns`).
+- **Taskbar/dev-window icon** — `src/main/window.ts` (`BrowserWindow`'s
+  `icon` option) and the macOS dev dock icon in `src/main/main.ts`, so it
+  shows correctly even before packaging.
+- **Browser-tab favicon** — `public/favicon-16.png` / `favicon-32.png`,
+  referenced from `index.html`.
+
 ## Screenshots
 
-*(from the real running app, not mockups — landscape, the client-confirmed primary orientation)*
+_(from the real running app, not mockups — landscape, the client-confirmed primary orientation)_
 
-| Idle | Win | So Close |
-|---|---|---|
+| Idle                                      | Win                                     | So Close                                      |
+| ----------------------------------------- | --------------------------------------- | --------------------------------------------- |
 | ![Idle screen](docs/screenshots/idle.png) | ![Win screen](docs/screenshots/win.png) | ![So Close screen](docs/screenshots/near.png) |
 
 The idle/running/result screens use a "digital courtroom dial" visual identity:
@@ -24,9 +43,11 @@ look. Typography is [Fraunces](https://github.com/undercasetype/Fraunces)
 labels), both open-license (SIL OFL) and bundled locally — no CDN, no
 Google Fonts, no client-supplied font required.
 
-*(A branded Coalition Court Reporters logo image is still pending from the
-client — the small circular "C" seal in the top-left is a placeholder built
-from the app's own theme, not the real company mark.)*
+_(The client-supplied art in `93-media/` is the app's own icon/badge — see
+[App icon](#app-icon) above. A separate branded Coalition Court Reporters
+*company* logo (for the small circular "C" seal in the top-left of the idle
+screen) hasn't been supplied yet, so that seal is still a placeholder built
+from the app's own theme.)_
 
 ## Development
 
@@ -106,14 +127,14 @@ Contains `settings.json` and `winners.json`, both managed by `electron-store`.
 
 ## Design system
 
-| Token | Value | Use |
-|---|---|---|
-| `--ink` | `#0b0b0c` | Base background |
-| `--panel` | `#17120f` | Dial face / card background |
-| `--red` / `--red-bright` | `#9e1b32` / `#c8283f` | Primary accent, running-state ring |
-| `--brass` / `--brass-dim` | `#c7a045` / `#8c6d3f` | Win/near accent, target mark |
-| `--parchment` | `#ede3d0` | Primary text |
-| `--ink-muted` | `#948b7f` | Secondary text |
+| Token                     | Value                 | Use                                |
+| ------------------------- | --------------------- | ---------------------------------- |
+| `--ink`                   | `#0b0b0c`             | Base background                    |
+| `--panel`                 | `#17120f`             | Dial face / card background        |
+| `--red` / `--red-bright`  | `#9e1b32` / `#c8283f` | Primary accent, running-state ring |
+| `--brass` / `--brass-dim` | `#c7a045` / `#8c6d3f` | Win/near accent, target mark       |
+| `--parchment`             | `#ede3d0`             | Primary text                       |
+| `--ink-muted`             | `#948b7f`             | Secondary text                     |
 
 Fonts and colors are defined once in `src/renderer/styles/theme.css` as CSS
 custom properties with fallbacks — every component inherits them
@@ -152,11 +173,8 @@ asset dependencies — see `docs/qa-results.md` for the full result.
   code review or, once, via a live screenshot session against the actual
   running app (keyboard and mouse-click input confirmed working on a real
   screen). The physical arcade button itself is still untested.
-- Client-supplied assets: a real app icon (`.ico`) for the Windows
-  installer, and real win/near/other/start/stop audio files.
 - Windows NSIS/portable installer has never been built or run on an actual
   Windows machine.
-- No winner-data export mechanism (CSV/USB) — out of current scope.
 - Windows auto-launch-on-boot is documented (`docs/windows-booth-setup.md`)
   but not scripted or tested.
 

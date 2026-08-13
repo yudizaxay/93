@@ -15,7 +15,6 @@ export interface GameSettings {
   buttonKey: string;
   debounceMs: number;
   lockoutMs: number;
-  winnerEntryTimeoutMs: number;
   maxRunningMs: number;
   /** Text shown under "9-3 PLAINTIFF VERDICT" on the WIN screen — admin-editable
    * so booth staff can rename the prize copy per event without a code change. */
@@ -45,7 +44,6 @@ export const DEFAULT_SETTINGS: GameSettings = {
   buttonKey: 'Space',
   debounceMs: 40,
   lockoutMs: 500,
-  winnerEntryTimeoutMs: 8000,
   maxRunningMs: 30000,
   winSubtitleText: 'YOU WIN!',
   allowManualTrigger: true,

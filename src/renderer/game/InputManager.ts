@@ -16,7 +16,10 @@ export class InputManager {
   private lastAcceptedTimestamp = -Infinity;
   private lastStopTimestamp = -Infinity;
 
-  constructor(private engine: EngineLike, private getSettings: () => GameSettings) {}
+  constructor(
+    private engine: EngineLike,
+    private getSettings: () => GameSettings
+  ) {}
 
   private trigger(nowMs: number): void {
     const settings = this.getSettings();

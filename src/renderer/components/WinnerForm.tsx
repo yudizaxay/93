@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { OnScreenKeyboard } from './OnScreenKeyboard';
+import { BrandHeader } from './BrandHeader';
 import { GameResult } from '../types/game';
 import './WinnerForm.css';
 
@@ -16,12 +17,10 @@ export function WinnerForm({
   result,
   onSaved,
   onSkip,
-  onActivity,
 }: {
   result: GameResult;
   onSaved: () => void;
   onSkip: () => void;
-  onActivity: () => void;
 }) {
   const [name, setName] = useState('');
   const [lawFirm, setLawFirm] = useState('');
@@ -38,18 +37,15 @@ export function WinnerForm({
     const [value, setValue] = values[activeField];
     if (value.length >= FIELD_MAX_LENGTH[activeField]) return;
     setValue(value + char);
-    onActivity();
   };
 
   const handleBackspace = () => {
     const [value, setValue] = values[activeField];
     setValue(value.slice(0, -1));
-    onActivity();
   };
 
   const selectField = (f: Field) => {
     setActiveField(f);
-    onActivity();
   };
 
   // Email is optional (SOW allows leaving it blank), but if something was
@@ -88,7 +84,6 @@ export function WinnerForm({
       selectField(name.trim().length === 0 ? 'name' : 'email');
       return;
     }
-    onActivity();
     void save();
   };
 
@@ -138,11 +133,20 @@ export function WinnerForm({
 
   return (
     <div className="winner-form">
+      <BrandHeader />
       <div className="winner-form-eyebrow">DOCKET NO. 0.93 — VERDICT RECORDED</div>
       {result.category === 'WIN' ? (
-        <h1>ADD YOUR NAME TO<br />CAALA PLAINTIFF VERDICTS?</h1>
+        <h1>
+          ADD YOUR NAME TO
+          <br />
+          CAALA PLAINTIFF VERDICTS?
+        </h1>
       ) : (
-        <h1>WANT US TO<br />FOLLOW UP WITH YOU?</h1>
+        <h1>
+          WANT US TO
+          <br />
+          FOLLOW UP WITH YOU?
+        </h1>
       )}
       <div className="winner-card">
         <div className="winner-fields">
@@ -163,7 +167,9 @@ export function WinnerForm({
           </label>
         </div>
         <div className="winner-actions">
-          <button onClick={save} disabled={!canSave}>SAVE</button>
+          <button onClick={save} disabled={!canSave}>
+            SAVE
+          </button>
           <button onClick={onSkip}>SKIP</button>
         </div>
       </div>

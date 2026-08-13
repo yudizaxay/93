@@ -18,4 +18,3 @@ contextBridge.exposeInMainWorld('api', {
     return () => ipcRenderer.removeListener('shortcut:toggle-admin', listener);
   },
 });
-

@@ -7,8 +7,7 @@
   justify-content: center;
   gap: clamp(1rem, 3vh, 2rem);
   background:
-    radial-gradient(ellipse 70% 60% at 50% 55%, rgba(200, 40, 63, 0.18), transparent 70%),
-    var(--ink, #0b0b0c);
+    radial-gradient(ellipse 70% 60% at 50% 55%, rgba(200, 40, 63, 0.18), transparent 70%), var(--ink, #0b0b0c);
 }
 
 .running-eyebrow {

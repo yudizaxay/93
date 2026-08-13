@@ -1,4 +1,5 @@
 .result-screen {
+  position: relative;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -6,6 +7,8 @@
   align-items: center;
   justify-content: center;
   gap: clamp(1rem, 3vh, 2rem);
+  /* Clears the absolutely-positioned BrandHeader pinned at the very top. */
+  padding-top: clamp(4rem, 9.5vh, 6.5rem);
   background: var(--ink, #0b0b0c);
   color: var(--parchment, #ede3d0);
   text-align: center;
@@ -31,25 +34,44 @@
   letter-spacing: 0.02em;
 }
 
-.result-win .result-value { color: var(--brass, #c7a045); }
-.result-win .result-heading { color: var(--red-bright, #c8283f); }
-.result-win .result-subheading { color: var(--brass, #c7a045); }
+.result-win .result-value {
+  color: var(--brass, #c7a045);
+}
+.result-win .result-heading {
+  color: var(--red-bright, #c8283f);
+}
+.result-win .result-subheading {
+  color: var(--brass, #c7a045);
+}
 
 .result-win .dial {
   animation: stamp-settle 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
 }
 
 @keyframes stamp-settle {
-  0% { transform: scale(1.35) rotate(-6deg); opacity: 0; }
-  60% { transform: scale(0.96) rotate(1deg); opacity: 1; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  0% {
+    transform: scale(1.35) rotate(-6deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.96) rotate(1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .result-near .result-heading,
-.result-near .result-subheading { color: var(--brass-dim, #8c6d3f); }
+.result-near .result-subheading {
+  color: var(--brass-dim, #8c6d3f);
+}
 
 .result-other .result-heading,
-.result-other .result-subheading { color: var(--ink-muted, #948b7f); }
+.result-other .result-subheading {
+  color: var(--ink-muted, #948b7f);
+}
 
 /* The "buzzer" — an instant flash acknowledging the stop press itself,
    independent of the win/lose outcome that follows immediately after. */
@@ -63,6 +85,10 @@
 }
 
 @keyframes buzzer-flash {
-  0% { opacity: 0.55; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+  }
 }
