@@ -7,7 +7,7 @@ export function BrandHeader() {
   return (
     <header className="brand-header">
       <img src={seal} alt="" className="brand-seal" aria-hidden="true" />
-      <span className="brand-text">COALITION COURT REPORTERS</span>
+      <span className="brand-text">ACME COURT REPORTING</span>
     </header>
   );
 }

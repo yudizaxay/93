@@ -1,7 +1,7 @@
 {
   "name": "93-verdict-challenge",
   "version": "1.0.0",
-  "description": "9-3 Verdict Challenge booth kiosk game for Coalition Court Reporters",
+  "description": "9-3 Verdict Challenge booth kiosk game for Acme Court Reporting",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,7 @@
     "package": "npm run build && electron-builder"
   },
   "keywords": [],
-  "author": "Coalition Court Reporters",
+  "author": "Acme Court Reporting",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

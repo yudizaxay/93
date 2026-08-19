@@ -11,7 +11,7 @@ export function WinnerRotation({ enabled }: { enabled: boolean }) {
   useEffect(() => {
     if (!enabled) return;
     // Leads captured after a NEAR/OTHER (non-winning) attempt live in the same
-    // store but must never appear on the public "CAALA Plaintiff Verdicts"
+    // store but must never appear on the public "Recent Verdicts"
     // rotation as if they'd won — see captureOnLossEnabled.
     window.api.getWinners().then((w) => setWinners(w.filter((x) => x.category === 'WIN').slice(-10)));
   }, [enabled]);
@@ -33,7 +33,7 @@ export function WinnerRotation({ enabled }: { enabled: boolean }) {
   const winner = winners[index];
   return (
     <div className="winner-rotation">
-      <div className="winner-rotation-heading">CAALA PLAINTIFF VERDICTS</div>
+      <div className="winner-rotation-heading">RECENT VERDICTS</div>
       <div className="winner-rotation-name" key={winner.name + index}>
         {winner.name}
       </div>

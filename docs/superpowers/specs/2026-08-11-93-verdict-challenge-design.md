@@ -5,7 +5,7 @@ Source of truth: `SOW_93.md` (58-section engineering SOW from client). This docu
 
 ## 1. Objective
 
-Production Windows kiosk app for Coalition Court Reporters' trade-show booth. Player presses one physical red USB arcade button to start a high-resolution timer, presses again to stop, tries to land on **0.93 seconds**. Runs 100% offline after installation. Reference prototype (design/UX only, not to be shipped): https://93secondtimergame.netlify.app/
+Production Windows kiosk app for Acme Court Reporting's trade-show booth. Player presses one physical red USB arcade button to start a high-resolution timer, presses again to stop, tries to land on **0.93 seconds**. Runs 100% offline after installation. Reference prototype (design/UX only, not to be shipped): https://93secondtimergame.netlify.app/
 
 ## 2. Decisions Resolved This Session
 

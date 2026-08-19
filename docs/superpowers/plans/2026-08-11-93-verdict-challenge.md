@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the production Electron kiosk app for Coalition Court Reporters' "9-3 Verdict Challenge" booth game, per `SOW_93.md` and `docs/superpowers/specs/2026-08-11-93-verdict-challenge-design.md`.
+**Goal:** Build the production Electron kiosk app for Acme Court Reporting's "9-3 Verdict Challenge" booth game, per `SOW_93.md` and `docs/superpowers/specs/2026-08-11-93-verdict-challenge-design.md`.
 
 **Architecture:** Electron main process (window/kiosk/global shortcuts/IPC) + React/TypeScript renderer. A framework-free `game/` core (GameEngine, TimerEngine, ResultEngine, InputManager) owns all timing and state-machine logic and is unit-testable without Electron or React. React components are pure renders of `GameEngine` state. `performance.now()` is the sole timing source of truth; `requestAnimationFrame` drives only the visible counter.
 
@@ -1709,7 +1709,7 @@ import './IdleScreen.css';
 export function IdleScreen() {
   return (
     <div className="idle-screen">
-      <div className="idle-logo">COALITION COURT REPORTERS</div>
+      <div className="idle-logo">ACME COURT REPORTING</div>
       <div className="idle-title">
         9-3<br />VERDICT<br />CHALLENGE
       </div>
@@ -2875,7 +2875,7 @@ export function IdleScreen() {
 
   return (
     <div className="idle-screen">
-      <div className="idle-logo">COALITION COURT REPORTERS</div>
+      <div className="idle-logo">ACME COURT REPORTING</div>
       <div className="idle-title">9-3<br />VERDICT<br />CHALLENGE</div>
       <WinnerRotation enabled={rotationEnabled} />
       <div className="idle-target">0.93</div>
@@ -3084,7 +3084,7 @@ git commit -m "feat: add bounded diagnostic Logger wired into GameEngine transit
 - [ ] **Step 1: Write electron-builder.yml**
 
 ```yaml
-appId: com.coalitioncourtreporters.verdictchallenge
+appId: com.acmecourtreporting.verdictchallenge
 productName: 9-3 Verdict Challenge
 directories:
   output: release
@@ -3112,8 +3112,8 @@ Place a locally-authored `build/icon.ico` (client to supply final branded icon; 
 {
   "name": "93-verdict-challenge",
   "version": "1.0.0",
-  "description": "9-3 Verdict Challenge booth kiosk game for Coalition Court Reporters",
-  "author": "Coalition Court Reporters",
+  "description": "9-3 Verdict Challenge booth kiosk game for Acme Court Reporting",
+  "author": "Acme Court Reporting",
   "main": "dist-electron/main.js"
 }
 ```

@@ -8,7 +8,7 @@ You can paste this as the project master prompt.
 
 ### 1. Project Objective
 
-Build a production-ready, premium interactive booth game for **Coalition Court Reporters** called:
+Build a production-ready, premium interactive booth game for **Acme Court Reporting** called:
 
 **9-3 VERDICT CHALLENGE**
 
@@ -52,7 +52,7 @@ Physical setup:
         │
         ├── 6' branded table
         │
-        ├── Coalition Court Reporters branding
+        ├── Acme Court Reporting branding
         │
         └── Roll-up banner / signage
 ```
@@ -541,7 +541,7 @@ The idle screen must:
 - be readable from a distance
 - make 0.93 visually dominant
 - immediately communicate what to do
-- subtly display Coalition branding
+- subtly display brand identity
 - avoid clutter
 - periodically support winner rotation
 
@@ -711,7 +711,7 @@ Avoid:
 - cartoon styling
 - cheesy jackpot graphics
 
-The design must remain sophisticated and consistent with Coalition branding.
+The design must remain sophisticated and consistent with brand identity.
 
 ---
 
@@ -1180,7 +1180,7 @@ Palette:
 
 ```text
 BLACK
-COALITION RED
+BRAND RED
 WHITE
 SUBTLE GOLD
 ```
@@ -1212,11 +1212,11 @@ Clutter
 
 ---
 
-# 29. Coalition Logo
+# 29. Company Logo
 
 Include the:
 
-**Coalition Court Reporters**
+**Acme Court Reporting**
 
 logo subtly.
 
@@ -1232,7 +1232,7 @@ or:
 9-3 VERDICT CHALLENGE
 ```
 
-The booth itself already has heavy Coalition branding.
+The booth itself already has heavy brand identity.
 
 ---
 
@@ -2200,4 +2200,4 @@ Tell Codex/Claude to build this in this order:
 
 Don't start with confetti and UI polish. **The timer, input state machine, result boundaries, and physical-button behavior need to be correct first.** Once those are solid, polish the booth experience around them.
 
-[1]: https://93secondtimergame.netlify.app/ "Coalition Court Reporters | 9-3 Verdict Challenge"
+[1]: https://93secondtimergame.netlify.app/ "Acme Court Reporting | 9-3 Verdict Challenge"

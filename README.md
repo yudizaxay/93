@@ -1,6 +1,6 @@
 # 9-3 Verdict Challenge
 
-Booth kiosk game for **Coalition Court Reporters**. A player presses one physical
+Booth kiosk game for **Acme Court Reporting**. A player presses one physical
 red USB arcade button to start a `performance.now()` timer, presses it again to
 stop, and tries to land exactly on **0.93 seconds**. Fullscreen Electron + React
 kiosk app for a Windows mini PC driving a 43" landscape TV at trade-show booths.
@@ -44,7 +44,7 @@ labels), both open-license (SIL OFL) and bundled locally — no CDN, no
 Google Fonts, no client-supplied font required.
 
 _(The client-supplied art in `93-media/` is the app's own icon/badge — see
-[App icon](#app-icon) above. A separate branded Coalition Court Reporters
+[App icon](#app-icon) above. A separate branded Acme Court Reporting
 *company* logo (for the small circular "C" seal in the top-left of the idle
 screen) hasn't been supplied yet, so that seal is still a placeholder built
 from the app's own theme.)_
@@ -115,7 +115,7 @@ app restart.
 Only actual wins prompt for details (Name, Law Firm, Email — entered via a
 full on-screen keyboard, no physical keyboard required). Email is retained
 locally but never displayed publicly; only the name rotates on the idle
-screen under the "CAALA Plaintiff Verdicts" heading. **Admin Panel → CLEAR
+screen under the "Recent Verdicts" heading. **Admin Panel → CLEAR
 TODAY'S WINNERS** removes all captured records.
 
 ## Local data location

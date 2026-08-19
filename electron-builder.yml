@@ -1,4 +1,4 @@
-appId: com.coalitioncourtreporters.verdictchallenge
+appId: com.acmecourtreporting.verdictchallenge
 productName: 9-3 Verdict Challenge
 directories:
   output: release

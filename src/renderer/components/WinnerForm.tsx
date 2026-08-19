@@ -144,7 +144,7 @@ export function WinnerForm({
         <h1>
           ADD YOUR NAME TO
           <br />
-          CAALA PLAINTIFF VERDICTS?
+          RECENT VERDICTS?
         </h1>
       ) : (
         <h1>
