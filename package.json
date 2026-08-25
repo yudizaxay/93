@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "Acme Court Reporting",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "electron-store": "^11.0.2"

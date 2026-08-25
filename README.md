@@ -1,10 +1,39 @@
 # 9-3 Verdict Challenge
 
+![Win screen](docs/screenshots/win.png)
+
+[![Electron](https://img.shields.io/badge/Electron-43-47848F?logo=electron&logoColor=white)](https://www.electronjs.org/)
+[![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-80%20tests%20passing-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Offline](https://img.shields.io/badge/Network-100%25%20offline-9e1b32)](#offline-verification)
+[![License: MIT](https://img.shields.io/badge/License-MIT-c7a045.svg)](LICENSE)
+
 Booth kiosk game for **Acme Court Reporting**. A player presses one physical
 red USB arcade button to start a `performance.now()` timer, presses it again to
 stop, and tries to land exactly on **0.93 seconds**. Fullscreen Electron + React
 kiosk app for a Windows mini PC driving a 43" landscape TV at trade-show booths.
 Runs **100% offline** after install.
+
+## Contents
+
+- [App icon](#app-icon)
+- [Screenshots](#screenshots)
+- [Development](#development)
+- [Production build](#production-build)
+- [Windows packaging](#windows-packaging)
+- [Admin shortcut](#admin-shortcut)
+- [Exit shortcut](#exit-shortcut)
+- [USB button configuration](#usb-button-configuration)
+- [Settings](#settings)
+- [Winner capture](#winner-capture)
+- [Local data location](#local-data-location)
+- [Design system](#design-system)
+- [Troubleshooting](#troubleshooting)
+- [Offline verification](#offline-verification)
+- [What's still pending](#whats-still-pending)
+- [Further documentation](#further-documentation)
 
 ## App icon
 
@@ -187,3 +216,7 @@ See `docs/qa-results.md` for the full acceptance-criteria checklist.
   show floor.
 - `docs/qa-results.md` — automated test results and the manual
   hardware/endurance QA checklist.
+
+## License
+
+[MIT](LICENSE)
