@@ -6,7 +6,7 @@ requires **physical hardware and/or multi-hour wall-clock time and has
 not yet been performed**. Nothing below is fabricated or simulated on
 its owner's behalf — pending items are marked PENDING, not passed.
 
-## 1. Automated test suite (SOW §44) — VERIFIED
+## 1. Automated test suite — VERIFIED
 
 Command: `npm test` (`vitest run`)
 
@@ -42,25 +42,23 @@ copies pass identically; the unique suite count is 9:
 - `OnScreenKeyboard.test.tsx` — on-screen keyboard backup input. PASS
 - `Logger.test.ts` — logging behavior. PASS
 
-Result: **all automated unit tests pass.** This satisfies SOW §44's
+Result: **all automated unit tests pass.** This satisfies the
 minimum requirement (boundary tests for result classification, plus
 negative/NaN/invalid-settings/extremely-large/rapid-input/held-key
 cases) and the broader unit coverage across the engine/storage/input
 layers.
 
-## 2. Offline audit (Task 26) — VERIFIED
+## 2. Offline audit — VERIFIED
 
 Static source audit (`grep` for network/remote references across
 `src/**/*.ts`, `*.tsx`, `*.css`, `*.html`, plus a manual review of
 `index.html`, `theme.css`, and `package.json` dependencies) found
-**zero** network or remote-asset references. Full detail in
-`.superpowers/sdd/2026-08-11-93-verdict-challenge/task-26-report.md`.
+**zero** network or remote-asset references.
 
-The physical half of that same task (install the packaged app, disable
-Wi-Fi, confirm end-to-end operation on real hardware) is itself flagged
-in the Task 26 report as an open manual-verification item — it is
-carried forward into the hardware pass below rather than duplicated
-here.
+The physical half of this same check (install the packaged app, disable
+Wi-Fi, confirm end-to-end operation on real hardware) is an open
+manual-verification item — it is carried forward into the hardware
+pass below rather than duplicated here.
 
 ## 3. Build / packaging verification — VERIFIED (build only)
 
@@ -79,7 +77,7 @@ here.
   Windows installer is exercised together with the hardware pass below,
   not as a standalone step here.
 
-## 4. Manual hardware / endurance pass (SOW §45-46) — PENDING
+## 4. Manual hardware / endurance pass — PENDING
 
 These items require the actual (or equivalent) USB arcade button, a
 physical Windows kiosk PC, a display running for multiple hours, and a
@@ -88,7 +86,7 @@ sandboxed, non-interactive environment, so they are recorded here as an
 explicit checklist for the client/dev team to execute before final
 sign-off — not as completed results.
 
-### Hardware testing (SOW §45)
+### Hardware testing
 
 | #   | Test                                                  | Status                                                   |
 | --- | ----------------------------------------------------- | -------------------------------------------------------- |
@@ -104,7 +102,7 @@ sign-off — not as completed results.
 | 10  | App restart                                           | PENDING — needs physical kiosk PC                        |
 | 11  | Several hundred to 1,000 simulated/manual game cycles | PENDING — needs physical arcade button, extended session |
 
-### Endurance testing (SOW §46)
+### Endurance testing
 
 | #   | Check                                           | Status                                                                                     |
 | --- | ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -125,7 +123,7 @@ encoder per `docs/hardware-setup.md`, deploy the packaged build
 recording pass/fail and any observations (e.g. via Chromium's built-in
 task manager, `chrome://gpu`, or `Logger` output) directly in this file.
 
-## 5. SOW §55 Acceptance Criteria cross-check
+## 5. Acceptance Criteria cross-check
 
 | Category      | Item                                               | Status                                                                                                                                                                                           |
 | ------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -169,7 +167,7 @@ they can be marked verified.
 - Automated regression gate: **130/130 tests passing, 0 failing.**
 - Offline/static audit: **clean, verified.**
 - Build: **succeeds.**
-- Hardware and multi-hour endurance testing per SOW §45-46: **not yet
+- Hardware and multi-hour endurance testing: **not yet
   performed** — requires physical USB arcade-button hardware and a
   real multi-hour kiosk session, both outside the reach of this
   sandboxed environment. This is the one remaining gate before final
